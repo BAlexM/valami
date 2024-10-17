@@ -1,13 +1,87 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title><%= message %></title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-</head>
-<body>
-    <p><%= message %></p>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Foglalás</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <style>
+       
+
+    </style>
+    <header>
+        <ul>
+            <li><a href="">Főodal </a></li>
+            <li><a href="index2.ejs">Feladatleírás (fejlesztés alatt)</a></li>
+            
+          </ul>
+        <section >
+            <div id="div1"><img id="kacsakep" class="" src="https://sarkanyvarwebaruhaz.hu/img/64404/SWI-0909027/SWI-0909027.jpg" alt=""></div>
+    
+        </section>
+        <br><br>
+        
+    </header>
+    <body>
+    
+    <div class="container mt-5">
+        <h2>Foglalás</h2>
+        <div id="alert" class="alert alert-danger d-none"></div>
+        
+        <form id="bookingForm">
+            <div class="form-group">
+                <label for="name">Név</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">E-mail cím</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="date">Dátum és időpont</label>
+                <input type="datetime-local" class="form-control" id="date" name="date" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="numberOfGuests">Vendégek száma</label>
+                <input type="number" class="form-control" id="numberOfGuests" name="numberOfGuests" min="1" max="10" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Foglalás</button>
+        </form>
+    </div>
+    
+    
+    <!-- Ezt a részt is nagyrészt kimásoltam egy pédából és sajnos nem értettem meg teljes mértékben. -->
+    <script>
+        document.getElementById('bookingForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            const response = await fetch('/booking', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+    
+            if (!response.ok) {
+                const error = await response.json();
+                document.getElementById('alert').textContent = error.message;
+                document.getElementById('alert').classList.remove('d-none');
+                return;
+            }
+            
+            window.location.href = '/sikeres-foglalas'; 
+        });
+    </script>
+    
+    </body>
 </html>

@@ -1,0 +1,37 @@
+header{
+    background-color: black;
+}
+body{
+    background-color: wheat;
+}
+#div1 {
+    width: 10px;
+    height: 10px;
+    font-weight: bold;
+    position: relative;
+    animation: mymove 10s;
+    animation-fill-mode: forwards;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+
+    animation-timing-function: linear;
+    background-color: black;
+}
+@keyframes mymove {
+    from {left: 0%;}
+    to {left: 96.5%;}
+}
+#kacsakep{
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+li {
+    display: inline;
+    margin-left: 2%;
+}
